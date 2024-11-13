@@ -88,8 +88,9 @@ public class ProductsOperations {
                                 log.warning("Product with ID " + productId + " not found.");
                             }
                         } else {
-                            log.warning("Invalid CHARACTER on \"View product details by ID\". You should type a NUMBER!");
-                            scanner.nextLine(); // Consuming the invalid input
+                            log.warning("Invalid CHARACTER TYPE on \"View product details by ID\". You should type a " +
+                                        "NUMBER!");
+                            scanner.nextLine();
                         }
                         break;
 
@@ -97,7 +98,7 @@ public class ProductsOperations {
                         Optional<Product> optionalProduct = productDAO.findProductByIdToUpdate();
                         if (optionalProduct.isPresent()) {
                             Product productToUpdate = optionalProduct.get();
-                            productToUpdate.setName("Product name modified.");
+                            productToUpdate.setName("Product name modified");
                             productToUpdate.setPrice(999F);
                             productDAO.updateProductById(productToUpdate);
                         } else {
