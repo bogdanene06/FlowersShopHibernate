@@ -36,7 +36,6 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public void createProduct(Product product) {
         openSessionAndTransaction();
-
         if (product != null) {
             session.persist(product);
             commitTransactionAndCloseSession();
@@ -60,7 +59,6 @@ public class ProductDAOImpl implements ProductDAO {
             Product product = new Product();
             product.setName(FlowerNameGenerator.generateRandomFlowerName());
             product.setPrice(random.nextFloat(10F, 1000F));
-
             productList.add(product);
             session.persist(product);
         }

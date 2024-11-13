@@ -184,23 +184,19 @@ public class OrdersDAOImpl implements OrdersDAO {
 
         try {
             Orders orders = session.find(Orders.class, orderId);
-
             if (orders != null) {
                 System.out.print("Insert new sender's name: ");
                 String newSenderName = scanner.nextLine();
                 orders.setSenderName(newSenderName);
 
-                // Generare produse noi și salvare înainte de a le asocia comenzii
+
                 List<Product> newProducts = generateRandomProducts(faker.number().numberBetween(1, 10));
                 for (Product product : newProducts) {
-                    // Verifică dacă produsul are deja un ID asignat (există în baza de date)
                     if (product.getId() == 0) {
-                        // Dacă nu are ID, salvează-l înainte de asociere
                         session.save(product);
                     }
                 }
                 orders.setProducts(newProducts);
-
                 session.merge(orders);
                 commitTransactionAndCloseSession();
                 log.info("Order with ID " + orderId + " has been successfully updated.");
